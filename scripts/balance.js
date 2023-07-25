@@ -1,16 +1,17 @@
 const { ethers } = require("hardhat");
 require("dotenv").config();
 
-const polygonBridgeAddress = "0x26f3b04299802f824f667F7bAa7b9799b0503Eb3"; // Replace with the Polygon UNFTC contract address
+// const polygonBridgeAddress = "0xd47C108D4182E6c7fbc9Fe2140dE4293618e1d00"; // Replace with the Polygon UNFTC contract address
+const polygonContractAddress = process.env.POLYGON_CONTRACT; // Replace with the Polygon UNFTC contract address
 const accountAddress = process.env.PUBLIC_KEY; // Replace with your account address
 
 async function balance() {
-  const polygonBridge = await ethers.getContractAt(
+  const polygonContract = await ethers.getContractAt(
     "UNFTC",
-    polygonBridgeAddress
+    polygonContractAddress
   );
 
-  const balanceOnMumbai = await polygonBridge.balanceOf(accountAddress);
+  const balanceOnMumbai = await polygonContract.balanceOf(accountAddress);
   console.log(`Balance of NFTs on Mumbai: ${balanceOnMumbai}`);
 }
 
